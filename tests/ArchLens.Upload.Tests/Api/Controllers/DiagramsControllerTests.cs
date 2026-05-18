@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using ArchLens.SharedKernel.Application;
 using ArchLens.Upload.Api.Controllers;
 using ArchLens.Upload.Application.Contracts.DTOs.DiagramDTOs;
@@ -19,6 +20,8 @@ namespace ArchLens.Upload.Tests.Api.Controllers;
 
 public class DiagramsControllerUnitTests
 {
+    private const string TestUserId = "test-user-123";
+
     private readonly ISender _sender = Substitute.For<ISender>();
     private readonly IDiagramUploadRepository _diagramRepo = Substitute.For<IDiagramUploadRepository>();
     private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
@@ -27,7 +30,18 @@ public class DiagramsControllerUnitTests
 
     public DiagramsControllerUnitTests()
     {
-        _controller = new DiagramsController(_sender, _diagramRepo, _unitOfWork, _fileStorage);
+        _controller = new DiagramsController(_sender, _diagramRepo, _unitOfWork, _fileStorage)
+        {
+            ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext
+                {
+                    User = new ClaimsPrincipal(new ClaimsIdentity(
+                        new[] { new Claim(ClaimTypes.NameIdentifier, TestUserId) },
+                        authenticationType: "Test")),
+                },
+            },
+        };
     }
 
     // ─── Upload ──────────────────────────────────────────────────────────
@@ -117,7 +131,7 @@ public class DiagramsControllerUnitTests
     public async Task GetStatus_Success_ShouldReturnOk()
     {
         var id = Guid.NewGuid();
-        var response = new DiagramStatusResponse(id, "test.png", "image/png", 1024, "Received", DateTime.UtcNow, null);
+        var response = new DiagramStatusResponse(id, "test.png", "image/png", 1024, "Received", DateTime.UtcNow, TestUserId);
         _sender.Send(Arg.Any<GetDiagramStatusQuery>(), Arg.Any<CancellationToken>())
             .Returns(Result.Success(response));
 
@@ -144,7 +158,7 @@ public class DiagramsControllerUnitTests
     public async Task GetById_Success_ShouldReturnOk()
     {
         var id = Guid.NewGuid();
-        var response = new DiagramStatusResponse(id, "arch.png", "image/png", 2048, "Processing", DateTime.UtcNow, "user-1");
+        var response = new DiagramStatusResponse(id, "arch.png", "image/png", 2048, "Processing", DateTime.UtcNow, TestUserId);
         _sender.Send(Arg.Any<GetDiagramStatusQuery>(), Arg.Any<CancellationToken>())
             .Returns(Result.Success(response));
 
@@ -186,7 +200,7 @@ public class DiagramsControllerUnitTests
     public async Task Delete_ExistingDiagram_ShouldReturnNoContent()
     {
         var diagram = DiagramUpload.Create("test.png", "image/png", 1024,
-            FileHash.Create("test"u8.ToArray()), "bucket/path");
+            FileHash.Create("test"u8.ToArray()), "bucket/path", TestUserId);
 
         _diagramRepo.GetByIdAsync(diagram.Id, Arg.Any<CancellationToken>())
             .Returns(diagram);
