@@ -87,17 +87,6 @@ jobs:
         if: steps.check-token.outputs.skip != 'true'
         run: dotnet tool install --global dotnet-sonarscanner
 
-      - name: Diagnose SONAR_TOKEN integrity
-        if: steps.check-token.outputs.skip != 'true'
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          echo "len=${#SONAR_TOKEN}"
-          echo "first4=${SONAR_TOKEN:0:4}"
-          echo "last2=${SONAR_TOKEN: -2}"
-          HTTP=$(curl -sS -o /tmp/_v.json -w "%{http_code}" -u "$SONAR_TOKEN:" https://sonarcloud.io/api/authentication/validate)
-          echo "validate http=$HTTP body=$(cat /tmp/_v.json)"
-
       - name: SonarScanner Begin
         if: steps.check-token.outputs.skip != 'true'
         run: >
