@@ -1,0 +1,22 @@
+tests/ArchLens.Upload.Tests/Api/Controllers/DiagramsControllerTests.cs
+  s_0fe0b0ea232cb8::t_3b736de7a96958 1,23-24,33-44
+  s_0fe0b0ea232cb8::t_10e417e29e76c0 134
+  s_0fe0b0ea232cb8::t_a2dc17d767937a 203
+  s_0fe0b0ea232cb8::t_651bb835d0e413 161
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "f771ca6c4cdde5979efba37af29ea3d986069029",
+  "prompts": {},
+  "sessions": {
+    "s_0fe0b0ea232cb8": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "c8683f97-9450-43bf-9576-6863b496e20f",
+        "model": "claude-opus-4-7-thinking-xhigh"
+      },
+      "human_author": "Rafael Pereira <66394829+rafahenrique1@users.noreply.github.com>"
+    }
+  }
+}
