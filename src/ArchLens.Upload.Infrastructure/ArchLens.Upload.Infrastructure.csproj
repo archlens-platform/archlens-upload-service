@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="../ArchLens.Upload.Application/ArchLens.Upload.Application.csproj" />
+    <ProjectReference Include="../../../archlens-contracts/src/ArchLens.Contracts/ArchLens.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="$(MassTransitVersion)" />
+    <PackageReference Include="Minio" Version="6.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.2" />
+  </ItemGroup>
+
+</Project>

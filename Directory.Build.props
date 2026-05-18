@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <MassTransitVersion>8.3.6</MassTransitVersion>
+    <SerilogVersion>4.2.0</SerilogVersion>
+    <SerilogSinksConsoleVersion>6.0.0</SerilogSinksConsoleVersion>
+    <SerilogSinksOpenTelemetryVersion>4.2.0</SerilogSinksOpenTelemetryVersion>
+    <SerilogAspNetCoreVersion>9.0.0</SerilogAspNetCoreVersion>
+    <FluentValidationVersion>11.11.0</FluentValidationVersion>
+    <MediatRVersion>12.4.1</MediatRVersion>
+    <OpenTelemetryVersion>1.10.0</OpenTelemetryVersion>
+    <NSubstituteVersion>5.3.0</NSubstituteVersion>
+    <FluentAssertionsVersion>7.1.0</FluentAssertionsVersion>
+    <TestcontainersVersion>4.3.0</TestcontainersVersion>
+  </PropertyGroup>
+</Project>

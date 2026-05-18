@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="../../../archlens-contracts/src/ArchLens.SharedKernel/ArchLens.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>
